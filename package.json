@@ -6,6 +6,7 @@
     "preview": "nodemon ./dist/server_bundle.js | pino-pretty"
   },
   "dependencies": {
+    "@vue/server-renderer": "^3.5.27",
     "express": "^5.2.1",
     "pino": "^10.2.1"
   },

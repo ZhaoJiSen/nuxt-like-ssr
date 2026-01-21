@@ -16,5 +16,7 @@ module.exports = {
   externals: [nodeExternals()],
   plugins: [],
   loader: [babelLoader({}), vueLoader()],
+  resolve: {
+    extensions: ['.js', '.vue', '.ts'],
+  },
 };
- 
