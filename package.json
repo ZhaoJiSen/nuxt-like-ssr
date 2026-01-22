@@ -8,7 +8,8 @@
   "dependencies": {
     "@vue/server-renderer": "^3.5.27",
     "express": "^5.2.1",
-    "pino": "^10.2.1"
+    "pino": "^10.2.1",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.6",

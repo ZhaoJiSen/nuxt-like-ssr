@@ -1,8 +1,11 @@
+const { merge } = require('webpack-merge')
 const { resolve } = require('path');
+const { DefinePlugin } = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader');
 
-module.exports = {
-  mode: 'development',
+const baseConfig = require("./webpack.base.config");
+
+module.exports = merge(baseConfig, {
   target: 'web',
   entry: './frontend/entry-client.js',
   output: {
@@ -10,12 +13,10 @@ module.exports = {
     path: resolve(__dirname, 'dist/client'),
     publicPath: '/client/',
   },
-  module: {
-    rules: [
-      { test: /\.vue$/, loader: 'vue-loader' },
-      { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
-    ],
-  },
-  resolve: { extensions: ['.js', '.vue'] },
-  plugins: [new VueLoaderPlugin()],
-};
+  plugins: [
+    new DefinePlugin({
+      __VUE_OPTIONS_API__: false,
+      __VUE_PROD_DEVTOOLS__: false
+    })
+  ],
+})
