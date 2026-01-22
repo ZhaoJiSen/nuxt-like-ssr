@@ -1,7 +1,6 @@
 const { resolve } = require('path');
+const { VueLoaderPlugin } = require('vue-loader/dist/index');
 
-const vueLoader = require('vue-loader');
-const babelLoader = require('babel-loader');
 const nodeExternals = require('webpack-node-externals');
 
 /** @type {import('webpack').Configuration} */
@@ -14,8 +13,22 @@ module.exports = {
     path: resolve(__dirname, './dist'),
   },
   externals: [nodeExternals()],
-  plugins: [],
-  loader: [babelLoader({}), vueLoader()],
+  plugins: [new VueLoaderPlugin()],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env'],
+        },
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+    ],
+  },
   resolve: {
     extensions: ['.js', '.vue', '.ts'],
   },

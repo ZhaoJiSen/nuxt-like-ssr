@@ -1,8 +1,8 @@
 {
-  "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/index.js | pino-pretty",
-    "build": "webpack --watch",
+    "build:server": "webpack --config webpack.server.config.js --watch",
+    "build:client": "webpack --config webpack.client.config.js --watch",
     "preview": "nodemon ./dist/server_bundle.js | pino-pretty"
   },
   "dependencies": {
