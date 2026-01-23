@@ -1,8 +1,32 @@
 <template>
   <div>
-    <h2>Vue</h2>
+    <h2>This is App Vue</h2>
     <div>{{ counter }}</div>
-    <button @click="plus"></button>
+
+    <button
+      @click="plus"
+      style="
+        padding: 8px 16px;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      "
+    >
+      Add
+    </button>
+    <br />
+    <br />
+    <br />
+    <br />
+    <RouterLink to="/home">Go to Home</RouterLink>
+    <br />
+    <RouterLink to="/about">Go to About</RouterLink>
+
+    <RouterView />
   </div>
 </template>
 

@@ -1,4 +1,4 @@
-import { VueLoaderPlugin } from "vue-loader/dist/index"
+const { VueLoaderPlugin } = require('vue-loader');
 
 /**
  * @type {import('webpack').Configuration}
@@ -8,21 +8,20 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
-          preset: ["@babel/preset-env"]
-        }
+          presets: ['@babel/preset-env'],
+        },
       },
       {
-        text: /\.vue$/,
-        loader: "vue-loader"
-      }
-    ]
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+    ],
   },
-  plugins: [
-    new VueLoaderPlugin(), 
-  ],
+  mode: 'development',
+  plugins: [new VueLoaderPlugin()],
   resolve: {
-    extensions: [".js", ".vue", ".json"]
-  }
-}
+    extensions: ['.js', '.vue', '.json'],
+  },
+};

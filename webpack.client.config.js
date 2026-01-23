@@ -1,9 +1,8 @@
-const { merge } = require('webpack-merge')
+const { merge } = require('webpack-merge');
 const { resolve } = require('path');
-const { DefinePlugin } = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader');
+const { DefinePlugin } = require('webpack');
 
-const baseConfig = require("./webpack.base.config");
+const baseConfig = require('./webpack.base.config');
 
 module.exports = merge(baseConfig, {
   target: 'web',
@@ -16,7 +15,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new DefinePlugin({
       __VUE_OPTIONS_API__: false,
-      __VUE_PROD_DEVTOOLS__: false
-    })
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
   ],
-})
+});

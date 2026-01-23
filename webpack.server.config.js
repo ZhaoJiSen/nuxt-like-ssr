@@ -1,8 +1,7 @@
 const { resolve } = require('path');
-const { VueLoaderPlugin } = require('vue-loader/dist/index');
+const { merge } = require('webpack-merge');
 
-const { merge } = require("webpack-merge")
-const baseConfig = require("./webpack.base.config");
+const baseConfig = require('./webpack.base.config');
 const nodeExternals = require('webpack-node-externals');
 
 /** @type {import('webpack').Configuration} */
