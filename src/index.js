@@ -5,6 +5,7 @@ const createApp = require('../frontend/main').default;
 const { resolve } = require('path');
 const { createMemoryHistory } = require('vue-router');
 const { renderToString } = require('@vue/server-renderer');
+const { createPiniaInstance } = require('../frontend/store');
 const { createRouterInstance } = require('../frontend/router');
 
 const app = express();
@@ -14,17 +15,18 @@ app.use('/client', express.static(resolve(__dirname, '../dist/client')));
 
 app.get('/*', async (req, res) => {
   let { app: vueApp } = createApp();
-  // 服务端没有浏览器环境（location/history API 不存在），必须用内存路由避免依赖 DOM
+
+  let pinia = createPiniaInstance();
   let router = createRouterInstance(createMemoryHistory());
 
   vueApp.use(router);
+  vueApp.use(pinia);
 
-  // 先把服务端路由切到当前请求的 URL，确保渲染的是正确页面
   await router.push(req.url || '/');
-  // 等待路由就绪（包含异步路由组件/路由守卫），避免 SSR 渲染出错或内容不完整
   await router.isReady();
 
   let appString = await renderToString(vueApp);
+  let state = JSON.stringify(pinia.state.value).replace(/</g, '\\u003c');
 
   res.send(
     `
@@ -37,6 +39,7 @@ app.get('/*', async (req, res) => {
     </head>
     <body>
       <div id="app">${appString}</div>
+      <script>window.__INITIAL_STATE__=${state}</script>
       <script src="/client/client_bundle.js"></script>
     </body>
     </html>

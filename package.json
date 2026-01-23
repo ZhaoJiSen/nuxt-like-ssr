@@ -8,6 +8,7 @@
   "dependencies": {
     "@vue/server-renderer": "^3.5.27",
     "express": "^5.2.1",
+    "pinia": "^3.0.4",
     "pino": "^10.2.1",
     "vue-router": "^4.6.4"
   },
